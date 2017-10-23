@@ -1,0 +1,36 @@
+{
+  "name": "gentle-proxy",
+  "version": "1.0.0",
+  "description": "A collection of ES6 peer proxies for Javascript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/baadc0de/gentle-proxy.git"
+  },
+  "keywords": [
+    "es6",
+    "proxy",
+    "logging",
+    "metrics",
+    "circuitbreaker"
+  ],
+  "author": "Bojan Šernek",
+  "license": "MIT",
+  "peerDependencies": {
+    "pino": "^4.8.0"
+  },
+  "devDependencies": {
+    "pino": "^4.8.0"
+  },
+  "bugs": {
+    "url": "https://github.com/baadc0de/gentle-proxy/issues"
+  },
+  "homepage": "https://github.com/baadc0de/gentle-proxy#readme",
+  "dependencies": {
+    "get-parameter-names": "^0.3.0",
+    "lodash.zipobject": "^4.1.3"
+  }
+}
