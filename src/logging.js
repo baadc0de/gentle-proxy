@@ -13,7 +13,7 @@ function defaultExtract(name, args) {
 }
 
 export default function(instance, name, _opts = {}) {
-  const opts = {makeLogger: getPino, level: 'debug', extract: defaultExtract}
+  const opts = {makeLogger: getPino, level: 'debug', extract: defaultExtract, ..._opts}
   const log  = opts.log || opts.makeLogger(name)
 
   return cached(instance, function (target, name) {
