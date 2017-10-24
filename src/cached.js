@@ -1,4 +1,4 @@
-module.exports = function (instance, decorator) {
+export default function(instance, decorator) {
   const cache = {}
 
   return new Proxy(instance, {

@@ -1,8 +1,8 @@
-const zipObject = require('lodash.zipobject')
-const getParameterNames = require('get-parameter-names')
+import zipObject from'lodash/zipobject'
+import getParameterNames from'get-parameter-names'
 
-const cached = require('./cached')
-const invoke = require('./invoke')
+import cached from './cached'
+import invoke from './invoke'
 
 function getPino(name) {
   return require('pino')({name})
@@ -12,8 +12,8 @@ function defaultExtract(name, args) {
   return args
 }
 
-module.exports = function withLogging(instance, name, _opts = {}) {
-  const opts = {makeLogger: getPino, level: 'debug', extract: defaultExtract, ..._opts}
+export default function(instance, name, _opts = {}) {
+  const opts = {makeLogger: getPino, level: 'debug', extract: defaultExtract}
   const log  = opts.log || opts.makeLogger(name)
 
   return cached(instance, function (target, name) {
