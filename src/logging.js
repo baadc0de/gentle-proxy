@@ -1,4 +1,4 @@
-import zipObject from'lodash/zipobject'
+import zipObject from'lodash/zipObject'
 import getParameterNames from'get-parameter-names'
 
 import cached from './cached'
