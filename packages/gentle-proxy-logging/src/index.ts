@@ -1,12 +1,11 @@
 import { ProxyGenerator, ProxySelector, Call, CallResult, ErroredCall, all } from "gentle-proxy";
 
-
 const defaultLogging: Logging.Options = {
   level: "info",
   logger: console
 }
 
-function Logging(name: String, selector: ProxySelector = all, opts: Logging.Options = defaultLogging): ProxyGenerator {
+function Logging (name: String, selector: ProxySelector = all, opts: Logging.Options = defaultLogging): ProxyGenerator {
   if (!opts) {
     opts = defaultLogging
   }
@@ -17,12 +16,12 @@ function Logging(name: String, selector: ProxySelector = all, opts: Logging.Opti
 
   return {
     doBefore(c: Call): Call {
-      log[level].call(log, name, c.args)
+      log[level].call(log, name, c.name, c.args)
       return c
     },
     doAfter(c: CallResult) {
       if (c.successful) {
-        log[level].call(log, name, 'returned', c.returnValue)
+        log[level].call(log, name, c.name, 'returned', c.returnValue)
       } else {
         log.error(name, 'threw', (c as ErroredCall).error)
       }
@@ -48,4 +47,4 @@ namespace Logging {
   }
 }
 
-export = Logging
+export default Logging

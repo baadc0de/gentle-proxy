@@ -7,11 +7,13 @@ const defaultOptions: Metering.Options = {
 
 function Metering(name: string, selector: ProxySelector = all, options: Metering.Options = defaultOptions): ProxyGenerator {
   const { help } = options
-  const histogram = new Histogram({ name, help: help || name, labelNames: ['function'], registers: options.registers })
 
   return {
+    prepareContext: function (instance, props, context) {
+      (context as any).histogram = new Histogram({ name, help: help || name, labelNames: ['function'], registers: options.registers })
+    },
     doBefore: function (call: Call): Call {
-      call.context.stopMetering = histogram.startTimer({ function: call.name })
+      call.context.stopMetering = call.context.histogram.startTimer({ function: call.name })
       return call
     },
     doAfter: function (call: CallResult): CallResult {
@@ -29,4 +31,4 @@ namespace Metering {
   }
 }
 
-export = Metering
+export default Metering
