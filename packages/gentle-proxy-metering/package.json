@@ -1,8 +1,8 @@
 {
-  "name": "gentle-proxy-logging",
+  "name": "gentle-proxy-metering",
   "version": "0.2.0",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/index.js",
   "scripts": {
     "prebuild": "rimraf build && tsc"
   },
@@ -10,9 +10,11 @@
   "author": "Bojan Šernek",
   "license": "MIT",
   "dependencies": {
-    "gentle-proxy": "0.2.0"
+    "gentle-proxy": "0.2.0",
+    "prom-client": "^10.2.1"
   },
   "devDependencies": {
-    "rimraf": "^2.6.2"
+    "rimraf": "^2.6.2",
+    "typescript": "^2.6.1"
   }
 }

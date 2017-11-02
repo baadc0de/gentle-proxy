@@ -31,6 +31,7 @@ export function except(...keys: Array<PropertyKey>): ProxySelector {
 export interface Call {
   vanillaFunction: Function
   function: Function
+  name: string
   thisArg: any
   args: Array<any>
   context: {[id: string]: any}
@@ -49,6 +50,7 @@ export interface ErroredCall extends Call {
 export type CallResult = ReturnedCall | ErroredCall
 
 export interface ProxyGenerator {
+  prepareContext?(instance: any, props: string[], context: object): void
   doBefore?(call: Call): Call
   doAfter?(call: CallResult): CallResult
   doBeforeAsync?(call: Call): Promise<Call>
@@ -59,11 +61,12 @@ export interface ProxyGenerator {
   selector: ProxySelector
 }
 
-function decorateSingleAsync(src: Function, gen: ProxyGenerator): Function {
+function decorateSingleAsync(src: Function, gen: ProxyGenerator, context: object, name: string): Function {
   const rv: any = async function (this: any, ...args: any[]) {
     var c: Call = {
-      args, 
-      context: {}, 
+      args,
+      name,
+      context: {...context}, 
       function: src, 
       vanillaFunction: (src as any).vanilla || src,
       thisArg: this
@@ -121,15 +124,16 @@ function executeCallResult(r: CallResult): any {
   }
 }
 
-function decorateSingle(src: Function, gen: ProxyGenerator): Function {
+function decorateSingle(src: Function, gen: ProxyGenerator, context: object, name: string): Function {
   if (gen.doAfterAsync || gen.doBeforeAsync) {
-    return decorateSingleAsync(src, gen)
+    return decorateSingleAsync(src, gen, context, name)
   }
 
   const rv: any = function (this: any, ...args: any[]) {
     var c: Call = {
       args,
-      context: {},
+      name,
+      context: {...context},
       function: src,
       vanillaFunction: (src as any).vanilla || src,
       thisArg: this
@@ -190,6 +194,18 @@ function decorateSingle(src: Function, gen: ProxyGenerator): Function {
 
 export default function decorate<T extends { [id: string]: any }>(target: T, ...generators: Array<ProxyGenerator>): T {
   const cache: { [id: string]: Function } = {}
+  const context: { [id: string]: any } = {}
+
+  for (var g of generators) {
+    const props = []
+    for (var propName in Object.getOwnPropertyNames(target)) {
+      if (g.selector(propName)) props.push(propName)
+    }
+
+    if (props.length > 0 && g.prepareContext) {
+      g.prepareContext(target, props, context)
+    }
+  }
 
   return new Proxy<T>(target, {
     get: function (target: T, p: PropertyKey, receiver: any): any {
@@ -201,7 +217,7 @@ export default function decorate<T extends { [id: string]: any }>(target: T, ...
         var current = target[p]
         for (var generator of generators) {
           if (generator.selector(p)) {
-            current = decorateSingle(current, generator)
+            current = decorateSingle(current, generator, context, p.toString())
           }
         }
 

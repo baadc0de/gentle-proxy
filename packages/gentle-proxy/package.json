@@ -28,5 +28,8 @@
   "dependencies": {
     "get-parameter-names": "^0.3.0",
     "lodash": "^4.17.4"
+  },
+  "devDependencies": {
+    "rimraf": "^2.6.2"
   }
 }

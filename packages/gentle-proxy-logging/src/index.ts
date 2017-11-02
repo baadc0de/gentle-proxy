@@ -1,25 +1,20 @@
 import { ProxyGenerator, ProxySelector, Call, CallResult, ErroredCall, all } from "gentle-proxy";
 
-export interface LoggingOptions {
-  level: string;
-  logger: any;
-  createLogger: Function | null
-}
 
-const defaultLogging: LoggingOptions = {
+const defaultLogging: Logging.Options = {
   level: "info",
   logger: console,
   createLogger: null
 }
 
-export default function logging(name: String = "", _selector: ProxySelector = all, p: LoggingOptions = defaultLogging): ProxyGenerator {
-  if (!p) {
-    p = defaultLogging
+function Logging(name: String, selector: ProxySelector = all, opts: Logging.Options = defaultLogging): ProxyGenerator {
+  if (!opts) {
+    opts = defaultLogging
   }
 
-  const log: any                = p.logger  || (p.createLogger && p.createLogger()) || console
-  const selector: ProxySelector = _selector || all
-  const level: string           = p.level   || "info"
+  const log: any           = opts.logger  || (opts.createLogger && opts.createLogger()) || console
+  const sel: ProxySelector = selector     || all
+  const level: string      = opts.level   || "info"
 
   return {
     doBefore(c: Call): Call {
@@ -34,6 +29,16 @@ export default function logging(name: String = "", _selector: ProxySelector = al
       }
       return c
     },
-    selector
+    selector: sel
   }
 }
+
+namespace Logging {
+  export interface Options {
+    level: string;
+    logger: any;
+    createLogger: Function | null
+  }
+}
+
+export = Logging
