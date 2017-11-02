@@ -1,5 +1,5 @@
 import { ProxyGenerator, ProxySelector, all, Call, CallResult } from 'gentle-proxy'
-import makeCircuitBreaker from 'opossum'
+import makeCircuitBreaker = require('opossum')
 
 const options = {
   timeout: 3000, // If our function takes longer than 3 seconds, trigger a failure
@@ -8,7 +8,7 @@ const options = {
 }
 
 export = function (selector: ProxySelector = all): ProxyGenerator {
-  const breakers = {}
+  const breakers: { [id: string]: any } = {}
   return {
     doBefore: function (call: Call): Call {
       if (!breakers[call.name]) {

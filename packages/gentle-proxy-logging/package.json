@@ -1,13 +1,20 @@
 {
   "name": "gentle-proxy-logging",
   "version": "0.2.0",
-  "description": "",
+  "description": "A collection of ES6 peer proxies for Javascript",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
     "prebuild": "rimraf build && tsc"
   },
-  "keywords": [],
+  "keywords": [
+    "es6",
+    "proxies",
+    "logging",
+    "synchronization",
+    "boilerplate",
+    "metrics"
+  ],
   "author": "Bojan Šernek",
   "license": "MIT",
   "dependencies": {
@@ -15,5 +22,13 @@
   },
   "devDependencies": {
     "rimraf": "^2.6.2"
+  },
+  "homepage": "https://github.com/baadc0de/gentle-proxy#readme",
+  "bugs": {
+    "url": "https://github.com/baadc0de/gentle-proxy/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/baadc0de/gentle-proxy.git"
   }
 }

@@ -3,9 +3,8 @@
   "version": "0.2.0",
   "description": "A collection of ES6 peer proxies for Javascript",
   "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",  
+  "types": "./dist/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "prepublish": "rimraf build && tsc"
   },
   "repository": {
@@ -14,10 +13,11 @@
   },
   "keywords": [
     "es6",
-    "proxy",
+    "proxies",
     "logging",
-    "metrics",
-    "circuitbreaker"
+    "synchronization",
+    "boilerplate",
+    "metrics"
   ],
   "author": "Bojan Šernek",
   "license": "MIT",
