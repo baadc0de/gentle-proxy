@@ -1,4 +1,4 @@
-import { ProxyGenerator, ProxySelector, Call, CallResult, ErroredCall, all } from "./proxy";
+import { ProxyGenerator, ProxySelector, Call, CallResult, ErroredCall, all } from "gentle-proxy";
 
 export interface LoggingOptions {
   level: string;

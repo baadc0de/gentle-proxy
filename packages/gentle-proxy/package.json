@@ -1,0 +1,32 @@
+{
+  "name": "gentle-proxy",
+  "version": "0.2.0",
+  "description": "A collection of ES6 peer proxies for Javascript",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",  
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublish": "rimraf build && tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/baadc0de/gentle-proxy.git"
+  },
+  "keywords": [
+    "es6",
+    "proxy",
+    "logging",
+    "metrics",
+    "circuitbreaker"
+  ],
+  "author": "Bojan Šernek",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/baadc0de/gentle-proxy/issues"
+  },
+  "homepage": "https://github.com/baadc0de/gentle-proxy#readme",
+  "dependencies": {
+    "get-parameter-names": "^0.3.0",
+    "lodash": "^4.17.4"
+  }
+}
