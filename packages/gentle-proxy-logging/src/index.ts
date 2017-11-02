@@ -3,8 +3,7 @@ import { ProxyGenerator, ProxySelector, Call, CallResult, ErroredCall, all } fro
 
 const defaultLogging: Logging.Options = {
   level: "info",
-  logger: console,
-  createLogger: null
+  logger: console
 }
 
 function Logging(name: String, selector: ProxySelector = all, opts: Logging.Options = defaultLogging): ProxyGenerator {
@@ -36,8 +35,16 @@ function Logging(name: String, selector: ProxySelector = all, opts: Logging.Opti
 namespace Logging {
   export interface Options {
     level: string;
-    logger: any;
-    createLogger: Function | null
+    logger?: any;
+    createLogger?: Function
+  }
+
+  export function pino(level: string = "info"): Options {
+    const pino = require('pino')
+    return {
+      createLogger: (name: string) => pino({ name }),
+      level
+    }
   }
 }
 
