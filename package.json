@@ -1,6 +1,6 @@
 {
   "name": "gentle-proxy-workspace",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A collection of ES6 peer proxies for Javascript",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,14 @@
     "type": "git",
     "url": "git+https://github.com/baadc0de/gentle-proxy.git"
   },
-  "keywords": ["es6", "proxies", "logging", "synchronization", "boilerplate", "metrics"],
+  "keywords": [
+    "es6",
+    "proxies",
+    "logging",
+    "synchronization",
+    "boilerplate",
+    "metrics"
+  ],
   "author": "Bojan Šernek",
   "license": "MIT",
   "bugs": {
