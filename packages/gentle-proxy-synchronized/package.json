@@ -1,0 +1,20 @@
+{
+  "name": "gentle-proxy-synchronized",
+  "version": "0.2.0",
+  "description": "",
+  "main": "./dist/index.js",
+  "scripts": {
+    "prebuild": "rimraf build && tsc"
+  },
+  "keywords": [],
+  "author": "Bojan Šernek",
+  "license": "MIT",
+  "dependencies": {
+    "gentle-proxy": "0.2.0",
+    "await-mutex": "^1.0.1"
+  },
+  "devDependencies": {
+    "rimraf": "^2.6.2",
+    "typescript": "^2.6.1"
+  }
+}
